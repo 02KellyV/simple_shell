@@ -5,6 +5,9 @@ We made this guide for us.
 Chapter Shell Project at Holberton School.
 
 ### Creating collaborators
+
+Match type example
+
 | User 1 | User 2 
 | :------- | ------: 
 | - Create Repository (go to `Settings`, select `Collaborators` and write mail or collaborator user)| Accept invitation
@@ -12,13 +15,17 @@ Chapter Shell Project at Holberton School.
 | Ready!
 
 ### Save changes 
-##### Changes in Origin master
+
+Changes in master branch
+
 | User 1 | User 2 
 | :------- | ------: 
 | file `f1`| Change some things `f1` and push origin master
 | git pull origin master  | Ready!
 
 ### Branchs
+
+Changes in another branch
 
 | User 1 | User 2 
 | :------- | ------: 
@@ -27,7 +34,7 @@ Chapter Shell Project at Holberton School.
  | When branch changes work, should merge: we prefer go to github.com/project_name, manual branch change, create Pull Request, Merge this PR
 | Ready!
 
-Sometimes `git fetch` doesn't work to download the changes of all our branches, we must move to the branch and do `git pull origin name_branch`.
+Note that sometimes `git fetch` doesn't work to download the changes of all our branches, we must move to the branch and do `git pull origin name_branch`.
 
 Git will tell us that we have pending PR's in `HEAD`
 
