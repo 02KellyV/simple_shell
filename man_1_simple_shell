@@ -1,0 +1,32 @@
+.TH "8 Agost 2019" "1.0" "Simple_shell man page"
+.SH NAME
+simple_shell
+.SH SYNOPSIS
+"holberton.h" header is needed.
+.SH DESCRIPTION
+
+.SS RETURN
+
+Validate: null byte used to end strings or negative value for errors
+
+.SS Format string
+Ordinary character (not%) and specification to coversions whit %
+
+.SS The flag characters
+       The character % is followed by zero or more of the following flags:
+       # The value should be converted to an "alternate form".
+       ' '(a space) A blank should be left before a positive number
+       (or empty string) produced by a signed conversion.
+       + A sign (+ or -) should always be placed before a number produced
+       by a signed conversion.By default a  sign  is used only for negative
+       numbers.A + overrides a space if both are used.
+
+.SH EXAMPLES
+
+
+.SH SEE ALSO
+
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Albeniz Martinez, Kelly Villa
