@@ -1,37 +1,54 @@
-int main()
-{
-	char *buff = NULL;
-	char *argv[] = {"", NULL}; 
-	char *tok;
-	size_t size = 0;
-	int line, exe;
+#include "simple_shell.h"
 
+/**
+* main - Shell functions
+* @argc: The number of arguments, variable unused.
+* @argv: Arguments.
+* 
+* Return: A int value.
+*/
+int main(void)
+{
+	char *buff, *tok[100];
+	size_t size = 0;
+	int line, exe, other, n = 1;
+
+	buff = malloc(sizeof(char *) * 1024);
+	if(buff == NULL)
+		return(0);
 	while (1)
 	{
 		write(1, "$ ", 2);
 		line = getline(&buff, &size, stdin);
-
-		if (status == -1)
+		buff[strlen(buff) - 1] = '\0';
+		if (line == -1)
 		{
-		/* Acá debemos considerar el error, pero no entiendo bien que hace perror */
-			perror();
-			free(buff);
+			perror("Error");
+			break;
 		}
-
-		tok = strtok(buff, " \n");
+		tok[0] = strtok(buff, " \n\t");
+		while(tok[n] != '\0')
+		{
+			tok[n] = strtok(NULL, " \n\t");
+			n++;
+		}
+		tok[n] = NULL;
+	/*	printf("%s\n", tok[1]); */
 		if (fork() == 0)
 		{
-		exe = execve(tok, argv, NULL);
+		exe = execve(tok[0], tok, NULL);
 			if (exe == -1)
 			{
-			/* Acá debemos considerar el error, pero no entiendo bien que hace perror */
-			perror();
+			perror("Error");
 			free(buff);
+			exit(0);
 			}	
 		}
-		/* Entender como funciona wait dentro del fork, que debe llevar */
+		else
+		{
+			wait(&other);
 		}
-		free(buff);
 	}
+free(buff);
 return (0);
 }
