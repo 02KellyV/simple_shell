@@ -41,7 +41,8 @@ int main(void)
 		buff[strlen(buff) - 1] = '\0';
 		if (line == -1)
 		{
-			perror("Error");
+			write(1, "\n", 2);
+			exit(0);
 			break;
 		}
 		usetok(buff, tok);
