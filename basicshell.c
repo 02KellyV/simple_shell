@@ -7,17 +7,23 @@
  * Return: A char value.
  */
 
-void usetok(char *buff, char *tok[])
+char **usetok(char *buff)
 {
-	int n = 1;
+	unsigned int n = 0;
+	char *tok;
+	char **toks;
 
-	tok[0] = strtok(buff, " \n\t");
-	while (tok[n] != '\0')
-	{
-		tok[n] = strtok(NULL, " \n\t");
+	toks = malloc(64 * sizeof(char *));
+	if(toks == NULL)
+		return(NULL);
+	tok = strtok(buff, " \n\t");
+	while (tok != NULL)
+	{	toks[n] = tok;
 		n++;
+	tok = strtok(NULL, " \n\t");
 	}
-	tok[n] = NULL;
+	toks[n] = NULL;
+return (toks);
 }
 
 /**
@@ -27,13 +33,11 @@ void usetok(char *buff, char *tok[])
 
 int main(void)
 {
-	char *buff, *tok[100];
+	char *buff = NULL, **args;
 	size_t size = 0;
 	int line, exe, other;
+	pid_t pid;
 
-	buff = malloc(sizeof(char *) * 1024);
-	if (buff == NULL)
-		return (0);
 	while (1)
 	{
 		write(1, "$ ", 2);
@@ -42,13 +46,15 @@ int main(void)
 		if (line == -1)
 		{
 			write(1, "\n", 2);
+			free(buff);
 			exit(0);
 			break;
 		}
-		usetok(buff, tok);
-		if (fork() == 0)
+		args = usetok(buff);
+		pid = fork();
+		if (pid == 0)
 		{
-			exe = execve(tok[0], tok, NULL);
+			exe = execve(args[0], args, NULL);
 			if (exe == -1)
 			{
 				perror("Error");
@@ -57,10 +63,10 @@ int main(void)
 			}
 		}
 		else
-		{
-			wait(&other);
+		{	waitpid(pid, &other, WUNTRACED);
 		}
 	}
 	free(buff);
+	free(args);
 	return (0);
 }
