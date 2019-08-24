@@ -1,6 +1,20 @@
 #include "simple_shell.h"
 
 /**
+* line - Function that use getline.
+* 
+* Return: Variable type char *.
+*/
+char *_line(void)
+{
+char *buff = NULL;
+size_t size = 0;
+ 
+getline(&buff, &size, stdin);
+buff[_strlen(buff) - 1] = '\0';
+return(buff);
+}
+/**
  * usetok - Shell functions
  * @buff: to save info
  * @tok: pointer to chars array
@@ -30,20 +44,17 @@ return (toks);
 * main - Contains the basic Shell functions
 * Return: void.
 */
-
 int main(void)
 {
-	char *buff = NULL, **args;
-	size_t size = 0;
-	int line, exe, other;
+	char **args, *buff;
+	int exe, other;
 	pid_t pid;
 
 	while (1)
 	{
 		write(1, "$ ", 2);
-		line = getline(&buff, &size, stdin);
-		buff[strlen(buff) - 1] = '\0';
-		if (line == -1)
+		buff = _line();
+		if (buff == NULL)
 		{
 			write(1, "\n", 2);
 			free(buff);
