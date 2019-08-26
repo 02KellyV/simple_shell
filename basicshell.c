@@ -28,6 +28,7 @@ char *_line(void)
 	if (var_get == -1)
 	{
 		printf("\n");
+		free(buff);
 		exit(0);
 	}
 
@@ -115,8 +116,8 @@ int main()
 		{
 			waitpid(pid, &other, WUNTRACED);
 		}
-	}
-	free(buff);
 	free(args);
+	free(buff);
+	}
 	return (0);
 }
