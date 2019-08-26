@@ -1,6 +1,19 @@
 #include "simple_shell.h"
 
 /**
+* my_handler - a signal handler
+* @var: Variable type int.
+*
+* Return: void function.
+*/
+void my_handler(int var)
+{
+	(void) var;
+	write(1, "\n", 1);
+	write(1, "$ ", 2);
+	fflush(stdout);
+}
+/**
 * *_line - Function that use getline.
 * Return: Variable type char *.
 */
@@ -62,6 +75,7 @@ int main()
 	extern char **environ;
 	pid_t pid;
 
+	signal(SIGINT, my_handler);
 	while (1)
 	{
 		write(1, "$ ", 2);
@@ -82,10 +96,13 @@ int main()
 			if(_strcmp(buff, "env") == 0)
 			{
 				printenv(environ);
-			}else
-
-			{
-			exe = execve(args[0], args, NULL);
+			}
+			else if(_strcmp(args[0], "exit") == 0)
+			{	fflush(stdout);
+				exit(0);
+			}
+			else
+			{	exe = execve(args[0], args, NULL);
 				if (exe == -1)
 				{
 					perror("Error");
