@@ -2,23 +2,38 @@
 
 /**
 * _getenv - Function that return a string of the environment varaible.
-* var: Variable type char *.
+* @env: Variable type char *.
 *
 * Return: Variable type char *
 */
-char * _getenv(char *env)
-{
-char *var;
-int i = 0;
 
-	while(environ[i])
+char *_getenv(char *env)
+{
+	char *var;
+	int i = 0;
+
+	while (environ[i])
 	{
-	var = strtok(environ[i], "=");
-		if(!_strcmp(env, var))
+		var = strtok(environ[i], "=");
+		if (!_strcmp(env, var))
 		{
-			return(strtok(NULL, "="));
+			return (strtok(NULL, "="));
 		}
-	i++;
+		i++;
 	}
-return(0);
-} 
+	return (0);
+}
+
+/**
+ *
+ */
+
+void printenv()
+{
+	int i;
+
+	for (i = 0; environ[i] != NULL; i++)
+	{
+		printf("\n%s", environ[i]);
+	}
+}
