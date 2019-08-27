@@ -78,26 +78,19 @@ int main()
 
 	signal(SIGINT, my_handler);
 	while (1)
-	{
-		write(1, "$ ", 2);
+	{	write(1, "$ ", 2);
 		buff = _line();
-
 		if (buff == NULL)
-		{
-			write(1, "\n", 2);
+		{	write(1, "\n", 2);
 			free(buff);
 			exit(0);
 			break;
 		}
 		args = usetok(buff);
 		pid = fork();
-
 		if (pid == 0)
-		{
-			if(_strcmp(buff, "env") == 0)
-			{
+		{	if(_strcmp(buff, "env") == 0)
 				printenv(environ);
-			}
 			else if(_strcmp(args[0], "exit") == 0)
 			{	fflush(stdout);
 				exit(0);
@@ -105,19 +98,17 @@ int main()
 			else
 			{	exe = execve(args[0], args, NULL);
 				if (exe == -1)
-				{
-					perror("Error");
+				{	perror("Error");
 					free(buff);
 					exit(0);
 				}
 			}
 		}
 		else
-		{
-			waitpid(pid, &other, WUNTRACED);
+		{	waitpid(pid, &other, WUNTRACED);
 		}
 	free(args);
 	free(buff);
 	}
-	return (0);
+return (0);
 }
