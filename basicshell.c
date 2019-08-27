@@ -69,11 +69,10 @@ char **usetok(char *buff)
 * Return: void.
 */
 
-int main()
+int main(void)
 {
 	char **args, *buff;
 	int exe, other;
-	extern char **environ;
 	pid_t pid;
 
 	signal(SIGINT, my_handler);
@@ -89,9 +88,10 @@ int main()
 		args = usetok(buff);
 		pid = fork();
 		if (pid == 0)
-		{	if(_strcmp(buff, "env") == 0)
+		{
+			if (_strcmp(buff, "env") == 0)
 				printenv(environ);
-			else if(_strcmp(args[0], "exit") == 0)
+			else if (_strcmp(args[0], "exit") == 0)
 			{	fflush(stdout);
 				exit(0);
 			}
@@ -105,8 +105,7 @@ int main()
 			}
 		}
 		else
-		{	waitpid(pid, &other, WUNTRACED);
-		}
+			waitpid(pid, &other, WUNTRACED);
 	free(args);
 	free(buff);
 	}
