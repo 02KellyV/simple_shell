@@ -3,9 +3,9 @@
 /**
 * my_handler - a signal handler
 * @var: Variable type int.
-*
 * Return: void function.
 */
+
 void my_handler(int var)
 {
 	(void) var;
@@ -13,6 +13,7 @@ void my_handler(int var)
 	write(1, "$ ", 2);
 	fflush(stdout);
 }
+
 /**
 * *_line - Function that use getline.
 * Return: Variable type char *.
@@ -99,8 +100,10 @@ int main()
 				printenv(environ);
 			}
 			else if(_strcmp(args[0], "exit") == 0)
-			{	fflush(stdout);
-				exit(0);
+			{
+				printf("palabra: %s", args[0]);
+				fflush(stdout);
+				fprintf(stdout, "palab:");
 			}
 			else
 			{	exe = execve(args[0], args, NULL);
