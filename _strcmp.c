@@ -6,6 +6,7 @@
 *
 * Return: To the value of int.
 */
+
 int _strcmp(char *s1, char *s2)
 {
 int n = 0;
@@ -19,4 +20,17 @@ break;
 }
 }
 return (n);
+}
+
+void free_double(char **ptr)
+{
+	int i;
+
+	i = 0;
+	while (ptr[i] != NULL)
+	{
+		free(ptr[i]);
+		i++;
+	}
+	free(ptr);
 }

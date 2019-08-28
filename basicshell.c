@@ -90,6 +90,7 @@ int main(void)
 		if (_strcmp(buff, "exit") == 0)
 		{
 			fflush(stdout);
+			free(args[0]);
 			free(args);
 			free(buff);
 			exit(0);
@@ -98,12 +99,14 @@ int main(void)
 		if (pid == 0)
 		{
 			if (_strcmp(buff, "env") == 0)
+			
 				printenv();
 			else
 				_execve(args);
 		}
 		else
 			waitpid(pid, &other, WUNTRACED);
+		free(args[0]);
 		free(args);
 		free(buff);
 	}
