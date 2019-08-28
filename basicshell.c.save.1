@@ -3,9 +3,9 @@
 /**
 * my_handler - a signal handler
 * @var: Variable type int.
+*
 * Return: void function.
 */
-
 void my_handler(int var)
 {
 	(void) var;
@@ -13,7 +13,6 @@ void my_handler(int var)
 	write(1, "$ ", 2);
 	fflush(stdout);
 }
-
 /**
 * *_line - Function that use getline.
 * Return: Variable type char *.
@@ -73,7 +72,7 @@ char **usetok(char *buff)
 int main(void)
 {
 	char **args, *buff;
-	int other;
+	int exe, other;
 	pid_t pid;
 
 	signal(SIGINT, my_handler);
@@ -98,10 +97,15 @@ int main(void)
 		if (pid == 0)
 		{
 			if (_strcmp(buff, "env") == 0){
-				printenv();
-			}else
-			{
-				_execve(args);
+
+				/*printenv(environ);*/
+}	else
+			{	exe = execve(args[0], args, NULL);
+				if (exe == -1)
+				{	perror("Error");
+					free(buff);
+					exit(0);
+				}
 			}
 		}
 		else
