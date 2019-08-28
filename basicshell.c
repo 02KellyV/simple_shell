@@ -70,57 +70,45 @@ char **usetok(char *buff)
 * Return: void.
 */
 
-int main()
+int main(void)
 {
 	char **args, *buff;
 	int exe, other;
-	extern char **environ;
 	pid_t pid;
 
 	signal(SIGINT, my_handler);
 	while (1)
-	{
-		write(1, "$ ", 2);
+	{	write(1, "$ ", 2);
 		buff = _line();
-
 		if (buff == NULL)
-		{
-			write(1, "\n", 2);
+		{	write(1, "\n", 2);
 			free(buff);
 			exit(0);
 			break;
 		}
 		args = usetok(buff);
 		pid = fork();
-
 		if (pid == 0)
 		{
-			if(_strcmp(buff, "env") == 0)
-			{
+			if (_strcmp(buff, "env") == 0)
 				printenv(environ);
-			}
-			else if(_strcmp(args[0], "exit") == 0)
-			{
-				printf("palabra: %s", args[0]);
-				fflush(stdout);
-				fprintf(stdout, "palab:");
+			else if (_strcmp(args[0], "exit") == 0)
+			{	fflush(stdout);
+				exit(0);
 			}
 			else
 			{	exe = execve(args[0], args, NULL);
 				if (exe == -1)
-				{
-					perror("Error");
+				{	perror("Error");
 					free(buff);
 					exit(0);
 				}
 			}
 		}
 		else
-		{
 			waitpid(pid, &other, WUNTRACED);
-		}
 	free(args);
 	free(buff);
 	}
-	return (0);
+return (0);
 }

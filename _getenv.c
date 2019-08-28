@@ -25,10 +25,9 @@ char *_getenv(char *env)
 }
 
 /**
- *
- */
-
-void printenv()
+* printenv - Function to print.
+*/
+void printenv(void)
 {
 	int i;
 
