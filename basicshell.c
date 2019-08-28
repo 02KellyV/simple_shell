@@ -9,8 +9,8 @@
 void my_handler(int var)
 {
 	(void) var;
-	write(1, "\n", 1);
-	write(1, "$ ", 2);
+	write(STDOUT_FILENO, "\n", 1);
+	write(STDOUT_FILENO, "$ ", 2);
 	fflush(stdout);
 }
 
