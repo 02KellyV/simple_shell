@@ -1,0 +1,54 @@
+#include "simple_shell.h"
+
+/**
+* my_handler - a signal handler
+* @var: Variable type int.
+* Return: void function.
+*/
+
+void _execve(char **args)
+{
+	int exe;
+
+	printf("%s",concat_path(args));
+        exe = execve(args[0], args, NULL);
+	if (exe == -1)
+	{
+		perror("Error");
+		exit(0);
+	}
+}
+
+char *concact_path(char **args)
+{
+	char *path, **paths, *tok;
+	int n = 0;
+
+	path = get_env();
+	tok = strtok(path, ":");
+
+	while (tok != NULL)
+	{
+		paths[n] = tok;
+		n++;
+		tok = strtok(NULL, ":");
+	}
+	paths[n] = NULL;
+	return paths;
+}
+
+char **get_path(void)
+{
+	char *var;
+
+	while (environ[i])
+	{
+		var = strtok(environ[i], "=");
+		if (_strcmp(var, "PATH"))
+		{
+			return var;
+		}
+		var = strtok(NULL, "PATH");
+		i++;
+	}
+}
