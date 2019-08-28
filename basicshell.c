@@ -87,15 +87,19 @@ int main(void)
 		}
 		args = usetok(buff);
 		pid = fork();
+
+		if (_strcmp(buff, "exit") == 0)
+                {
+			fflush(stdout);
+                        exit(0);
+                }
+
 		if (pid == 0)
 		{
-			if (_strcmp(buff, "env") == 0)
-				printenv(environ);
-			else if (_strcmp(args[0], "exit") == 0)
-			{	fflush(stdout);
-				exit(0);
-			}
-			else
+			if (_strcmp(buff, "env") == 0){
+
+				/*printenv(environ);*/
+}	else
 			{	exe = execve(args[0], args, NULL);
 				if (exe == -1)
 				{	perror("Error");
