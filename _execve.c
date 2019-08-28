@@ -76,7 +76,7 @@ void _execve(char **args)
 	char **path, **exec;
 
 	path = concat_path(args);
-	exe = execve(args[0], args, NULL);
+	exe = execve(args[0], args, environ);
 	exec = malloc(64 * sizeof(char *));
 	while (path[n] != NULL)
 	{
@@ -92,6 +92,8 @@ void _execve(char **args)
 	if (flag == 0)
 	{
 		perror("Error");
+		free_double(path);
+		free_double(exec);
 		free(exec);
 		exit(0);
 	}

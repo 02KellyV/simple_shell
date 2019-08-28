@@ -21,4 +21,5 @@ char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 void printenv(void);
 void _execve(char **args);
+void free_double(char **ptr);
 #endif
