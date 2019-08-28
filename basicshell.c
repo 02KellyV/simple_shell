@@ -89,8 +89,7 @@ int main(void)
 		args = usetok(buff);
 		if (_strcmp(buff, "exit") == 0)
 		{
-			fflush(stdout);
-			free(args[0]);
+			fflush(stdout);		
 			free(args);
 			free(buff);
 			exit(0);
@@ -106,8 +105,7 @@ int main(void)
 		}
 		else
 			waitpid(pid, &other, WUNTRACED);
-		free(args[0]);
-		free(args);
+		free_double(args);
 		free(buff);
 	}
 	return (0);

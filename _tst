@@ -1,2 +1,2 @@
 #!/bin/bash
-gcc -std=c90 -Wall -Werror -Wextra -pedantic *.c -o hsh && ./hsh
+gcc -g -std=c90 -Wall -Werror -Wextra -pedantic *.c -o hsh && ./hsh
