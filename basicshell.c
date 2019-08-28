@@ -26,9 +26,8 @@ char *_line(void)
 	int var_get;
 
 	var_get = getline(&buff, &size, stdin);
-	if (var_get == -1)
+	if (var_get == EOF)
 	{
-		printf("\n");
 		free(buff);
 		exit(0);
 	}

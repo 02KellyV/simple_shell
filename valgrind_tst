@@ -1,2 +1,2 @@
 #!/bin/bash
-gcc -g -Wall -Werror -Wextra -pedantic *.c -o shell && valgrind --leak-check=full --show-leak-kinds=all ./shell
+gcc -std=c90 -g -Wall -Werror -Wextra -pedantic *.c -o shell && valgrind --leak-check=full --show-leak-kinds=all ./shell
