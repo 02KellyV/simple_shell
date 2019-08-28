@@ -81,33 +81,32 @@ int main(void)
 	{	write(1, "$ ", 2);
 		buff = _line();
 		if (buff == NULL)
-		{	write(1, "\n", 2);
+		{
+			write(1, "\n", 2);
 			free(buff);
 			exit(0);
 			break;
 		}
 		args = usetok(buff);
-		pid = fork();
-
 		if (_strcmp(buff, "exit") == 0)
-                {
+		{
 			fflush(stdout);
-                        exit(0);
-                }
-
+			free(args);
+			free(buff);
+			exit(0);
+		}
+		pid = fork();
 		if (pid == 0)
 		{
-			if (_strcmp(buff, "env") == 0){
+			if (_strcmp(buff, "env") == 0)
 				printenv();
-			}else
-			{
+			else
 				_execve(args);
-			}
 		}
 		else
 			waitpid(pid, &other, WUNTRACED);
-	free(args);
-	free(buff);
+		free(args);
+		free(buff);
 	}
-return (0);
+	return (0);
 }
