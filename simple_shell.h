@@ -1,6 +1,5 @@
 #ifndef _SIMPLESHELL_
 #define _SIMPLESHELL_
-
 /* Libraries */
 #define _GNU_SOURCE
 #include <stdio.h>
@@ -11,7 +10,6 @@
 #include <unistd.h>
 #include <signal.h>
 #include <sys/types.h>
-
 /* Prototypes */
 char **usetok(char *buff);
 extern char **environ;

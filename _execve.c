@@ -1,12 +1,10 @@
 #include "simple_shell.h"
-
 /**
- * *concat -  concatenate strings
- * @s1: pointer to args1
- * @s2: pointer to args2
- * Return: char result
- */
-
+* concat - concatenate strings
+* @s1: pointer to args1
+* @s2: pointer to args2
+* Return: char result
+*/
 char *concat(char *s1, char *s2)
 {
 	char *result = malloc(strlen(s1) + strlen(s2) + 1);
@@ -15,12 +13,10 @@ char *concat(char *s1, char *s2)
 	_strcat(result, s2);
 	return (result);
 }
-
 /**
- * get_path -  obtain path
- * Return: void function.
- */
-
+* get_path -  obtain path
+* Return: void function.
+*/
 char *get_path(void)
 {
 	char *var;
@@ -38,13 +34,11 @@ char *get_path(void)
 	}
 	return (NULL);
 }
-
 /**
- * concat_path -  concatenate path
- * @args: double pointer to args
- * Return: void function.
- */
-
+* concat_path - concatenate path
+* @args: double pointer to args
+* Return: void function.
+*/
 char **concat_path(char **args)
 {
 	char *path, **paths, *tok;
@@ -63,13 +57,11 @@ char **concat_path(char **args)
 	paths[n] = NULL;
 	return (paths);
 }
-
 /**
- * _execve -  execute program
- * @args: double pointer to args
- * Return: void function.
- */
-
+* _execve -  execute program
+* @args: double pointer to args
+* Return: void function.
+*/
 void _execve(char **args)
 {
 	int exe, flag = 0, n = 0;

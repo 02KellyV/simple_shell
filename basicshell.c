@@ -1,11 +1,9 @@
 #include "simple_shell.h"
-
 /**
 * my_handler - a signal handler
 * @var: Variable type int.
 * Return: void function.
 */
-
 void my_handler(int var)
 {
 	(void) var;
@@ -13,12 +11,10 @@ void my_handler(int var)
 	write(STDOUT_FILENO, "$ ", 2);
 	fflush(stdout);
 }
-
 /**
-* *_line - Function that use getline.
+* _line - Function that use getline.
 * Return: Variable type char *.
 */
-
 char *_line(void)
 {
 	char *buff = NULL;
@@ -35,13 +31,11 @@ char *_line(void)
 	buff[_strlen(buff) - 1] = '\0';
 	return (buff);
 }
-
 /**
- * usetok - Shell functions
- * @buff: to save info
- * Return: A char value.
- */
-
+* usetok - Shell functions
+* @buff: to save info
+* Return: A char value.
+*/
 char **usetok(char *buff)
 {
 	unsigned int n = 0;
@@ -63,12 +57,10 @@ char **usetok(char *buff)
 	toks[n] = NULL;
 	return (toks);
 }
-
 /**
 * main - Contains the basic Shell functions
 * Return: void.
 */
-
 int main(void)
 {
 	char **args, *buff;
@@ -77,13 +69,13 @@ int main(void)
 
 	signal(SIGINT, my_handler);
 	while (1)
-	{	write(1, "$ ", 2);
+	{	write(STDOUT_FILENO, "$ ", 2);
 		buff = _line();
 		if (buff == NULL)
 		{
-			write(1, "\n", 2);
+			write(STDOUT_FILENO, "\n", 2);
 			free(buff);
-			exit(0);
+			exit(-1);
 			break;
 		}
 		args = usetok(buff);
