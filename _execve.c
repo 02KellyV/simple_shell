@@ -86,14 +86,13 @@ void _execve(char **args)
 		if (exe != -1)
 		{
 			flag = 1;
-			
 		}
 		n++;
 	}
 	if (flag == 0)
 	{
 		perror("Error");
-		free(exec);		
+		free(exec);
 		exit(0);
 	}
 }
