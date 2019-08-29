@@ -85,7 +85,7 @@ int main(void)
 			continue;
 		}
 		if (_strcmp(buff, "env") == 0)
-			printenv();
+			_printenv();
 		else if (_strcmp(buff, "exit") == 0)
 		{	fflush(stdout);
 			free(args);
