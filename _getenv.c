@@ -1,15 +1,15 @@
 #include "simple_shell.h"
 
 /**
-* printenv - Function to print.
+* _printenv - Function to print.
 */
 void _printenv(void)
 {
-	int i;
+	char **envp;
 
-	for (i = 0; environ[i] != NULL; i++)
+	for (envp = environ; *envp; envp++)
 	{
-		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
+		write(STDOUT_FILENO, *envp, _strlen(*envp));
 		write(STDOUT_FILENO, "\n", 1);
 	}
 }
