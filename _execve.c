@@ -7,7 +7,7 @@
 */
 char *concat(char *s1, char *s2)
 {
-	char *result = malloc(strlen(s1) + strlen(s2) + 1);
+	char *result = malloc(_strlen(s1) + _strlen(s2) + 1);
 
 	_strcpy(result, s1);
 	_strcat(result, s2);

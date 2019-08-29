@@ -21,7 +21,11 @@ break;
 }
 return (n);
 }
-
+/**
+* free_double - Free the grid
+* @ptr: Double pointer.
+*
+*/
 void free_double(char **ptr)
 {
 	int i;
