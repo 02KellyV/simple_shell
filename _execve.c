@@ -41,7 +41,7 @@ char *get_path(void)
 */
 char **concat_path(char **args)
 {
-	char *path, **paths, *tok;
+	char *path, **paths, *tok, *tmp;
 	int n = 0;
 
 	path = get_path();
@@ -50,9 +50,11 @@ char **concat_path(char **args)
 
 	while (tok != NULL)
 	{
-		paths[n] = concat(tok, concat("/", args[0]));
+		tmp = concat("/", args[0]);
+		paths[n] = concat(tok, tmp);
 		n++;
 		tok = strtok(NULL, ":");
+		free(tmp);
 	}
 	paths[n] = NULL;
 	return (paths);
@@ -64,50 +66,33 @@ char **concat_path(char **args)
 */
 void _execve(char **args)
 {
-	int exe, flag = 0, n = 0;
-	char **path, **exec;
+	int n = 0, exist = 0;
+	char **path;
 
 	path = concat_path(args);
-	exe = execve(args[0], args, environ);
-	exec = malloc(64 * sizeof(char *));
 
-	/*while (path[n] != NULL)
-	{
-		exec[0] = path[n];
-		exec[1] = NULL;
-		exe = execve(exec[0], exec, environ);
+	exist = access(args[0], F_OK | X_OK);
 
-		if (access(path, F_OK) != 0)
-		{
-			printf("'%s' does not exist!\n", path);
-			flag = 1;
-		}
-		n++;
-	}*/
-	while (path[n] != NULL)
+	if (exist == -1)
 	{
-		exec[0] = path[n];
-		exec[1] = NULL;
-		exe = execve(exec[0], exec, environ);
-		if (exe != -1)
+		while (path[n])
 		{
-			flag = 1;
+			exist = access(path[n], F_OK | X_OK);
+
+			if (exist != -1)
+			{
+				args[0] = path[n];
+				break;
+			}
+			n++;
 		}
-		n++;
 	}
-	printf("-->*%d\n", flag);
-	if (flag == 0)
+
+	if (execve(args[0], args, environ) == -1)
 	{
 		perror("Error");
 		free_double(path);
-		free(args[0]);
-		free_double(exec);
-		exit(0);
-	}
-	else
-	{
-		printf("--->%s\n", args[0]);
-		free(args[0]);
+		free_double(args);
 		exit(127);
 	}
 }
