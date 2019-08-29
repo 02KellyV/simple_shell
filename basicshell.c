@@ -74,7 +74,9 @@ int main(void)
 
 	signal(SIGINT, my_handler);
 	while (1)
-	{	write(STDOUT_FILENO, "$ ", 2);
+	{
+		if (isatty(STDIN_FILENO) == 1)
+			write(STDOUT_FILENO, "$ ", 2);
 		buff = _line();
 		args = usetok(buff);
 		if (args[0] == NULL)
