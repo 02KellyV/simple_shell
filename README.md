@@ -1,13 +1,10 @@
 # simple_shell
-----
 
 # Description!
-----
 
 The shell is the command interpretor in an operating system such as Unix or GNU/Linux, it is a program that executes other programs. This shell has the basic functionality, it provides a computer user an interface so that the user can run different commands with some input data.
 
 ### Files
-----
 
 | File | Description |
 | ------ | ------ |
@@ -24,12 +21,10 @@ The shell is the command interpretor in an operating system such as Unix or GNU/
 | simple_shell.h | Header file, it addresses all the function prototypes we used |
 
 ### Requirements
-----
 
 simple_shell is designed to run in the Ubuntu linux environment and to be compiled using the GNU compiler collection v. gcc 4.8.4 with flags -Wall, -Werror, -Wextra, and -pedantic.
 
 ### Installation
-----
 
 * Clone this repository: https://github.com/amartinezre05/simple_shell.git
 * Change directories into the repository: acd simple_shell
@@ -37,7 +32,6 @@ simple_shell is designed to run in the Ubuntu linux environment and to be compil
 * Run the shell: ./hsh
 
 ### Example
-----
 
 Run the executable in your terminal after compiling:
 
@@ -49,7 +43,6 @@ _getenv.c   README.md   simple_shell.h      _strcmp.c   _strlen.c
 ```
 
 ### Authors
-----
 
  - Albéniz Martínez
  - Kelly Villa
