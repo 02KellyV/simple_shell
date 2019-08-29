@@ -73,13 +73,15 @@ int main(void)
 		buff = _line();
 		if (buff == NULL)
 		{
-			write(STDOUT_FILENO, "\n", 2);
+			write(STDOUT_FILENO, "\n", 1);
 			free(buff);
 			exit(-1);
 			break;
 		}
 		args = usetok(buff);
-		if (_strcmp(buff, "exit") == 0)
+		if (_strcmp(buff, "env") == 0)
+			printenv();
+		else if (_strcmp(buff, "exit") == 0)
 		{
 			fflush(stdout);
 			free(args);
@@ -89,10 +91,7 @@ int main(void)
 		pid = fork();
 		if (pid == 0)
 		{
-			if (_strcmp(buff, "env") == 0)
-				printenv();
-			else
-				_execve(args);
+			_execve(args);
 		}
 		else
 			waitpid(pid, &other, WUNTRACED);

@@ -9,7 +9,6 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <signal.h>
-#include <sys/types.h>
 /* Prototypes */
 char **usetok(char *buff);
 extern char **environ;
