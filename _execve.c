@@ -82,7 +82,7 @@ void _execve(char **args)
 			printf("'%s' does not exist!\n", path);
 			flag = 1;
 		}
-		n++;	
+		n++;
 	}*/
 	while (path[n] != NULL)
 	{
