@@ -98,8 +98,6 @@ int main(void)
 		}
 		else
 			waitpid(pid, &other, WUNTRACED);
-		if (isatty(STDIN_FILENO) != 1)
-			break;
 		free(args);
 		free(buff);
 	}
