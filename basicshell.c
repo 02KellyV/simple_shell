@@ -7,8 +7,7 @@
 void my_handler(int var)
 {
 	(void) var;
-	write(STDOUT_FILENO, "\n", 1);
-	write(STDOUT_FILENO, "$ ", 2);
+	write(STDOUT_FILENO, "\n$ ", 3);
 	fflush(stdout);
 }
 /**
@@ -27,7 +26,12 @@ char *_line(void)
 		free(buff);
 		exit(0);
 	}
-
+	if (buff == NULL)
+	{
+		write(STDOUT_FILENO, "\n", 1);
+		free(buff);
+		exit(-1);
+	}
 	buff[_strlen(buff) - 1] = '\0';
 	return (buff);
 }
@@ -45,6 +49,7 @@ char **usetok(char *buff)
 	if (toks == NULL)
 	{
 		return (NULL);
+		exit(-1);
 	}
 	tok = strtok(buff, " \n\t");
 
@@ -71,30 +76,28 @@ int main(void)
 	while (1)
 	{	write(STDOUT_FILENO, "$ ", 2);
 		buff = _line();
-		if (buff == NULL)
-		{
-			write(STDOUT_FILENO, "\n", 1);
-			free(buff);
-			exit(-1);
-			break;
-		}
 		args = usetok(buff);
+		if (args[0] == NULL)
+		{	free(buff);
+			free(args);
+			continue;
+		}
 		if (_strcmp(buff, "env") == 0)
 			printenv();
 		else if (_strcmp(buff, "exit") == 0)
-		{
-			fflush(stdout);
+		{	fflush(stdout);
 			free(args);
 			free(buff);
 			exit(0);
 		}
 		pid = fork();
 		if (pid == 0)
-		{
-			_execve(args);
+		{	_execve(args);
 		}
 		else
 			waitpid(pid, &other, WUNTRACED);
+		if (isatty(STDIN_FILENO) != 1)
+			break;
 		free(args);
 		free(buff);
 	}

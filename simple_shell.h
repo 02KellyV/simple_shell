@@ -17,6 +17,9 @@ int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 void printenv(void);
+char *concat(char *s1, char *s2);
+char *get_path(void);
+char **concat_path(char **args);
 void _execve(char **args);
 void free_double(char **ptr);
 #endif

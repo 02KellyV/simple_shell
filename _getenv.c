@@ -5,7 +5,7 @@
 * @env: Variable type char *.
 *
 * Return: Variable type char *
-*/
+*
 
 char *_getenv(char *env)
 {
@@ -23,7 +23,7 @@ char *_getenv(char *env)
 	}
 	return (0);
 }
-
+*/
 /**
 * printenv - Function to print.
 */
