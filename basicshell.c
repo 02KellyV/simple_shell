@@ -51,13 +51,13 @@ char **usetok(char *buff)
 		return (NULL);
 		exit(-1);
 	}
-	tok = strtok(buff, " \n\t");
+	tok = _strtok(buff, " \n\t");
 
 	while (tok != NULL)
 	{
 		toks[n] = tok;
 		n++;
-		tok = strtok(NULL, " \n\t");
+		tok = _strtok(NULL, " \n\t");
 	}
 	toks[n] = NULL;
 	return (toks);

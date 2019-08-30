@@ -24,12 +24,12 @@ char *get_path(void)
 
 	while (environ[i])
 	{
-		var = strtok(environ[i], "=");
+		var = _strtok(environ[i], "=");
 			if (!_strcmp(var, "PATH"))
 			{
-				return (strtok(NULL, "="));
+				return (_strtok(NULL, "="));
 			}
-			var = strtok(NULL, "=");
+			var = _strtok(NULL, "=");
 			i++;
 	}
 	return (NULL);
@@ -45,7 +45,7 @@ char **concat_path(char **args)
 	int n = 0;
 
 	path = get_path();
-	tok = strtok(path, ":");
+	tok = _strtok(path, ":");
 	paths = malloc(64 * sizeof(char *));
 
 	while (tok != NULL)
@@ -53,7 +53,7 @@ char **concat_path(char **args)
 		tmp = concat("/", args[0]);
 		paths[n] = concat(tok, tmp);
 		n++;
-		tok = strtok(NULL, ":");
+		tok = _strtok(NULL, ":");
 		free(tmp);
 	}
 	paths[n] = NULL;
